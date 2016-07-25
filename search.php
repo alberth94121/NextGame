@@ -14,12 +14,19 @@
 	else{ 
 		$page=1; 
 	};
+	if(isset($_GET["query"])){ 
+		$search  = $_GET["query"]; 
+	} 
+	else{ 
+		$search=""; 
+	};
 	$perPage = 2;
 	$start = ($page-1) * $perPage; 
-	$sql = "SELECT COUNT(gameID) FROM pcGames"; 
+	$sql = "SELECT COUNT(gameID) FROM pcGames WHERE name LIKE '%$search%'"; 
 	$rs = @mysql_query($sql); 
 	$row = mysql_fetch_row($rs);  
 	$total = ceil($row[0] / $perPage); 
+
 
 
 
@@ -94,24 +101,24 @@
 				<!--Home-->
 				<div class="row">
 					  <div class="span12 cnt-title2" style="padding:20px">
-						<h1 style="text-align: left;">Upcoming PC Games!</h1> 
-				  					   
-					  </div>	
-					
+					   <h1 style="text-align:left;margin:20px">PC Games</h1>  
+					  </div>				   
 				</div>
 		</div>
 		
 		<div class="container">	
 			<div class="row">	
 				<div class="span12 cnt-title2" >
-					<form action="search.php?">
-							<input type="text" name="query" style="height: 15px;"/><br>
-							<input type="hidden" name="page" value="1" />	 
+					<form action="search.php?" >
+							<input type="text" name="query" style="height: 15px;"/><br> 
+							<input type="hidden" name="page" value="1" />							
 							<input  class='btn btn-default' type="submit" value="Search"> 
 					</form>	
 				</div>
 			</div>
 		</div>
+
+
 
 		<div class="container">	
 			<div class="row">	
@@ -120,7 +127,7 @@
 					<?php
 						if($page > 1){
 							$p=$page-1;
-							echo "<a  href='test.php?page=$p' class='btn btn-default'>Prev </a>";
+							echo "<a  href='search.php?page=$p&query=$search' class='btn btn-default'>Prev </a>";
 							echo ' ';
 						}
 						else {echo "<a class='btn btn-default'>Prev</a>";
@@ -133,7 +140,7 @@
 							while($num < $pre){
 								
 							
-								echo "<a href='test.php?page=$num' class='btn btn-default'>$num </a>";
+								echo "<a href='search.php?page=$num&query=$search' class='btn btn-default'>$num </a>";
 								echo ' ';
 								$num+=1;
 							}
@@ -142,7 +149,7 @@
 							$num = 1;
 							while($num < $pre){
 								
-								echo "<a href='test.php?page=".$num."' class='btn btn-default' >$num </a>";
+								echo "<a href='search.php?page=$num&query=$search' class='btn btn-default' >$num </a>";
 								echo ' ';
 								$num+=1;
 							}
@@ -156,7 +163,7 @@
 							$num = $pre+1;
 							while($num <= $pre+$amt){
 								
-								echo "<a class='btn btn-default' href='test.php?page=".$num."'>$num </a>";
+								echo "<a class='btn btn-default' href='search.php?page=$num&query=$search'>$num </a>";
 								echo ' ';
 								$num+=1;
 							}
@@ -165,7 +172,7 @@
 							$num = $pre+1;
 							while($num <= $total){
 								
-								echo "<a class='btn btn-default' href='test.php?page=".$num."'>$num </a>";
+								echo "<a class='btn btn-default' href='search.php?page=$num&query=$search'>$num </a>";
 								echo ' ';
 								$num+=1;
 							}
@@ -176,7 +183,7 @@
 						
 						if($page < $total){
 							$p=$page+1;
-							echo "<a class='btn btn-default' href='test.php?page=".$p."'> Next</a>";
+							echo "<a class='btn btn-default' href='search.php?page=$p&query=$search'> Next</a>";
 							echo ' ';
 								
 						}
@@ -221,7 +228,7 @@
 					
 					<tbody>
 					<?php
-						$query = @mysql_query("SELECT * FROM pcGames ORDER BY releaseDate LIMIT $start,$perPage");
+						$query = @mysql_query("SELECT * FROM pcGames WHERE name LIKE '%$search%' ORDER BY releaseDate LIMIT $start,$perPage");
 						
 						while( $row = @mysql_fetch_assoc($query)) 
 						{
