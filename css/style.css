@@ -16,6 +16,9 @@ body{
 }
 
 p{line-height: 24px}
+p.nav {
+    font-size: 20px;
+}
 a{color:#0088cc;}
 a:hover{text-decoration: none;}
 
@@ -124,6 +127,7 @@ Carousel
 	text-align: center;
 }
 .cnt-title { text-align: center; margin-bottom: 50px;}
+.cnt-title2 { text-align: center; margin-bottom: 10px;}
 .cnt-title span { 
 	font-size: 24px;
 	font-weight: 200;
