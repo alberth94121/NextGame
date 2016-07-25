@@ -14,7 +14,7 @@
 	else{ 
 		$page=1; 
 	};
-	$perPage = 3;
+	$perPage = 2;
 	$start = ($page-1) * $perPage; 
 	$sql = "SELECT COUNT(gameID) FROM pcGames"; 
 	$rs = @mysql_query($sql); 
@@ -99,10 +99,7 @@
 				</div>
 		</div>
 		
-		<style>
 
-
-</style>
 
 		<div class="container">	
 			<div class="row">	
@@ -111,15 +108,69 @@
 					<?php
 						if($page > 1){
 							$p=$page-1;
-							echo "<a href='test.php?page=".$p."'>Prev&nbsp&nbsp&nbsp&nbsp</a>";
+							echo "<a  href='test.php?page=$p' class='btn btn-default'>Prev </a>";
+							echo ' ';
 						}
-						else echo "Prev&nbsp&nbsp&nbsp&nbsp";
+						else {echo "<a class='btn btn-default'>Prev</a>";
+						echo ' ';}
+						
+						$pre = $page;
+						$amt = 5;
+						if($pre >= 1+ $amt){
+							$num = $pre-$amt;
+							while($num < $pre){
+								
+							
+								echo "<a href='test.php?page=$num' class='btn btn-default'>$num </a>";
+								echo ' ';
+								$num+=1;
+							}
+						}
+						else{
+							$num = 1;
+							while($num < $pre){
+								
+								echo "<a href='test.php?page=".$num."' class='btn btn-default' >$num </a>";
+								echo ' ';
+								$num+=1;
+							}
+						
+						}
+						echo "<a class='btn btn-default' ><strong>$page</strong></a>";
+						echo ' ';
+						
+						$pre = $page;
+						if($pre <= $total-$amt){
+							$num = $pre+1;
+							while($num <= $pre+$amt){
+								
+								echo "<a class='btn btn-default' href='test.php?page=".$num."'>$num </a>";
+								echo ' ';
+								$num+=1;
+							}
+						}
+						else{
+							$num = $pre+1;
+							while($num <= $total){
+								
+								echo "<a class='btn btn-default' href='test.php?page=".$num."'>$num </a>";
+								echo ' ';
+								$num+=1;
+							}
+						
+						}
+						
+
+						
 						if($page < $total){
 							$p=$page+1;
-							echo "<a href='test.php?page=".$p."'>Next</a>";
+							echo "<a class='btn btn-default' href='test.php?page=".$p."'> Next</a>";
+							echo ' ';
 								
 						}
-						else echo "Next";
+						else {echo "<a class='btn btn-default'>Next</a>";
+							echo ' ';}
+						
 					
 					?>
 				</p>
