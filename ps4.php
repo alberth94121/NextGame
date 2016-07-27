@@ -10,7 +10,7 @@
 	else{ 
 		$page=1; 
 	};
-	$system = 1;
+	$system = 2;
 	$perPage = 10;
 	$start = ($page-1) * $perPage; 
 	$sql = "SELECT COUNT(gameID) FROM Games WHERE systemID=$system"; 
@@ -90,7 +90,7 @@
 			<div class="row">
 				<div class="span12 cnt-title2" style="padding:20px" >
 				
-					<h1  style="text-align: left;margin:20px">Upcoming PC Games!</h1> 
+					<h1  style="text-align: left;margin:20px">Upcoming PS4 Games!</h1> 
 				</div>
 			</div>
 		</div>

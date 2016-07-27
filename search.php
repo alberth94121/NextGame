@@ -22,7 +22,7 @@
 	else{ 
 		$system=""; 
 	};
-	$perPage = 2;
+	$perPage = 10;
 	$start = ($page-1) * $perPage; 
 	$sql = "SELECT COUNT(gameID) FROM Games WHERE (systemID=$system AND name LIKE '%$search%')"; 
 	$rs = @mysql_query($sql); 
@@ -82,9 +82,9 @@
 									<ul class="nav">
 										<li class="active"><a href="index.html">Home</a></li>
 										<li class="active"><a href="pc.php">PC</a></li>
-										<li class="active"><a href="index.html">PS4</a></li>
-										<li class="active"><a href="index.html">Xbox</a></li>
-										<li class="active"><a href="index.html">3DS</a></li>
+										<li class="active"><a href="ps4.php">PS4</a></li>
+										<li class="active"><a href="xbox.php">Xbox</a></li>
+										<li class="active"><a href="3ds.php">3DS</a></li>
 									</ul>
 								</div>
 							</div>
@@ -99,11 +99,20 @@
 			<div class="row">
 					  <div class="span12 cnt-title2" style="padding:20px">
 					  <?php
-					     if($system == 1){
+					    if($system == 1){
 							echo '<h1 style="text-align:left;margin:20px">PC Games</h1>'; 
 						 }
-						 else
-							 echo '<h1 style="text-align:left;margin:20px">All Games</h1>';
+						else if($system == 2){
+							echo '<h1 style="text-align:left;margin:20px">PS4 Games</h1>'; 
+						 }
+						else if($system == 3){
+							echo '<h1 style="text-align:left;margin:20px">Xbox One Games</h1>'; 
+						 }
+						else if($system == 4){
+							echo '<h1 style="text-align:left;margin:20px">Nintendo 3DS Games</h1>'; 
+						 }
+						else
+							echo '<h1 style="text-align:left;margin:20px">All Games</h1>';
 					  ?>
 					  </div>				   
 			</div>
@@ -120,7 +129,7 @@
 						?>	
 						<input type="text" name="query" style="height: 15px;"/><br> 
 						<input type="hidden" name="page" value="1" />	
-						<input  class='btn btn-default' type="submit" value="Search"> 
+						<input  class='button3' type="submit" value="Search"> 
 					</form>	
 				</div>
 			</div>
@@ -134,12 +143,12 @@
 					<?php
 						if($page > 1){
 							$p=$page-1;
-							echo "<a  href='search.php?id=$system&query=$search&page=$p' class='btn btn-default'>Prev </a>";
-							echo ' ';
+							echo "<a  href='search.php?id=$system&query=$search&page=$p' class='button'>Prev </a>";
+							echo '';
 						}
 						else {
-							echo "<a class='btn btn-default'>Prev</a>";
-							echo ' ';
+							echo "<a class='button'>Prev</a>";
+							echo '';
 						}
 						
 						$pre = $page;
@@ -147,51 +156,51 @@
 						if($pre >= 1+ $amt){
 							$num = $pre-$amt;
 							while($num < $pre){
-								echo "<a href='search.php?id=$system&query=$search&page=$num' class='btn btn-default'>$num </a>";
-								echo ' ';
+								echo "<a href='search.php?id=$system&query=$search&page=$num' class='button'>$num </a>";
+								echo '';
 								$num+=1;
 							}
 						}
 						else{
 							$num = 1;
 							while($num < $pre){
-								echo "<a href='search.php?id=$system&query=$search&page=$num' class='btn btn-default' >$num </a>";
-								echo ' ';
+								echo "<a href='search.php?id=$system&query=$search&page=$num' class='button' >$num </a>";
+								echo '';
 								$num+=1;
 							}
 						
 						}
 						
-						echo "<a class='btn btn-default' ><strong>$page</strong></a>";
-						echo ' ';
+						echo "<a class='button2' ><strong>$page</strong></a>";
+						echo '';
 						
 						$pre = $page;
 						if($pre <= $total-$amt){
 							$num = $pre+1;
 							while($num <= $pre+$amt){
-								echo "<a class='btn btn-default' href='search.php?id=$system&query=$search&page=$num'>$num </a>";
-								echo ' ';
+								echo "<a class='button' href='search.php?id=$system&query=$search&page=$num'>$num </a>";
+								echo '';
 								$num+=1;
 							}
 						}
 						else{
 							$num = $pre+1;
 							while($num <= $total){
-								echo "<a class='btn btn-default' href='search.php?id=$system&query=$search&page=$num'>$num </a>";
-								echo ' ';
+								echo "<a class='button' href='search.php?id=$system&query=$search&page=$num'>$num </a>";
+								echo '';
 								$num+=1;
 							}
 						}
 						
 						if($page < $total){
 							$next=$page+1;
-							echo "<a class='btn btn-default' href='search.php?id=$system&query=$search&page=$next'> Next</a>";
-							echo ' ';
+							echo "<a class='button' href='search.php?id=$system&query=$search&page=$next'> Next</a>";
+							echo '';
 								
 						}
 						else {
-							echo "<a class='btn btn-default'>Next</a>";
-							echo ' ';
+							echo "<a class='button'>Next</a>";
+							echo '';
 						}
 					?>
 				</p>
@@ -231,7 +240,7 @@
 							$description = $row['description'];
 							$date = $row['releaseDate'];
 							
-							echo "<tr><td>$src</td><td>$name</td><td>$description</td><td>$date</td>";
+							echo "<tr><td>$src</td><td>$name</td><td>$description</td><td><t11>$date</t11></td>";
 						 
 						}
 					?>

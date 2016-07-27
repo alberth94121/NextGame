@@ -1,32 +1,26 @@
 <!DOCTYPE HTML>
 
+<!-- Page Setup -->
 <?php
-	$dbhost = 'localhost';
-	$dbuser = 'root';
-	$dbpass = '';
-	$db = 'test2';
-	$conn = mysql_connect($dbhost, $dbuser, $dbpass)or die("Can't connect");;
-	mysql_select_db($db, $conn);
-	
+	include 'api.php';
+	dbConnect();
 	if(isset($_GET["page"])){ 
 		$page  = $_GET["page"]; 
 	} 
 	else{ 
 		$page=1; 
 	};
-	$perPage = 2;
+	$system = 4;
+	$perPage = 10;
 	$start = ($page-1) * $perPage; 
-	$sql = "SELECT COUNT(gameID) FROM pcGames"; 
+	$sql = "SELECT COUNT(gameID) FROM Games WHERE systemID=$system"; 
 	$rs = @mysql_query($sql); 
 	$row = mysql_fetch_row($rs);  
 	$total = ceil($row[0] / $perPage); 
-
-
-
-
-
 ?> 
+
 <html>
+	<!-- Head -->
 	<head>
 			<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 			<title>NextGame</title>
@@ -40,7 +34,7 @@
 			<link href="css/style.css" rel="stylesheet"> 
 			<link href="css/table.css" rel="stylesheet"> 
 			
-			<!--Font-->
+			<!-- Font -->
 			<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300,400,600' rel='stylesheet' type='text/css'>
 			   
 			<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -48,12 +42,12 @@
 			  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 			<![endif]-->
 			  
-			  <!-- Fav and touch icons -->
-			  <link rel="shortcut icon" href="ico/favicon.ico">
-			  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
-			  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
-			  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
-			  <link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
+			<!-- Fav and touch icons -->
+			<link rel="shortcut icon" href="ico/favicon.ico">
+			<link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144-precomposed.png">
+			<link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114-precomposed.png">
+			<link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72-precomposed.png">
+			<link rel="apple-touch-icon-precomposed" href="ico/apple-touch-icon-57-precomposed.png">
 
 			<!-- SCRIPT -->  
 			<script src="http://code.jquery.com/jquery.js"></script>
@@ -61,79 +55,86 @@
 					
 	</head>
 
+	<!-- Body -->
 	<body>
-		  <!--HEADER ROW-->
-		  <div id="header-row">
+		<!-- Header -->
+		<div id="header-row">
 			<div class="container">
-			  <div class="row">
-					  <!--LOGO-->
-					  <div class="span3"><img src="img/NextGame.png"></div>
-					  <!-- /LOGO -->
+				<div class="row">
+					<!-- Logo -->
+					<div class="span3"><img src="img/NextGame.png"></div>
 
-					<!-- MAIN NAVIGATION -->  
-					  <div class="span9">
+					<!-- Nav -->  
+					<div class="span9">
 						<div class="navbar  pull-right">
-						  <div class="navbar-inner">
+						    <div class="navbar-inner">
 								<a data-target=".navbar-responsive-collapse" data-toggle="collapse" class="btn btn-navbar"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a>
 								<div class="nav-collapse collapse navbar-responsive-collapse">
 									<ul class="nav">
 										<li class="active"><a href="index.html">Home</a></li>
-										<li class="active"><a href="test.php">PC</a></li>
-										<li class="active"><a href="index.html">Xbox</a></li>
-										<li class="active"><a href="index.html">PS4</a></li>
+										<li class="active"><a href="pc.php">PC</a></li>
+										<li class="active"><a href="ps4.php">PS4</a></li>
+										<li class="active"><a href="xbox.php">Xbox</a></li>
+										<li class="active"><a href="3ds.php">3DS</a></li>
 									</ul>
 								</div>
-						   </div>
+						    </div>
 						</div>
-					  </div>
-			  </div>
+					</div>
+		        </div>
 			</div>
-		  </div>
-		  
-		<div class="container">		
-				<!--Home-->
-				<div class="row">
-					  <div class="span12 cnt-title2" style="padding:20px">
-						<h1 style="text-align: left;">Upcoming PC Games!</h1> 
-				  					   
-					  </div>	
-					
-				</div>
 		</div>
 		
+		<!-- Title -->
+		<div class="container">		
+			<div class="row">
+				<div class="span12 cnt-title2" style="padding:20px">
+					<h1 style="text-align: left;margin:20px">Upcoming Nintendo 3DS Games!</h1> 
+				</div>
+			</div>
+		</div>
+		
+		<!-- SearchBox -->
 		<div class="container">	
 			<div class="row">	
 				<div class="span12 cnt-title2" >
 					<form action="search.php?">
+							<?php
+								$inputID ='<input type="hidden" name="id" value="'.$system.'" />';
+								echo $inputID;				
+							?>	
 							<input type="text" name="query" style="height: 15px;"/><br>
-							<input type="hidden" name="page" value="1" />	 
+							<input type="hidden" name="page" value="1" />							
 							<input  class='btn btn-default' type="submit" value="Search"> 
 					</form>	
 				</div>
 			</div>
 		</div>
 
+		<!-- Pages -->
 		<div class="container">	
 			<div class="row">	
 				<div class="span12 cnt-title2" style="padding:0px">
 				<p class="nav">				
 					<?php
+						//list previous page
 						if($page > 1){
 							$p=$page-1;
-							echo "<a  href='test.php?page=$p' class='btn btn-default'>Prev </a>";
+							echo "<a  href='pc.php?page=$p' class='btn btn-default'>Prev </a>";
 							echo ' ';
 						}
-						else {echo "<a class='btn btn-default'>Prev</a>";
-						echo ' ';}
+						else{
+							echo "<a class='btn btn-default'>Prev</a>";
+							echo ' ';
+						}
 						
+						// list $amt pages before current
 						$pre = $page;
 						$amt = 5;
 						if($pre >= 1+ $amt){
 							$num = $pre-$amt;
 							while($num < $pre){
-								
-							
-								echo "<a href='test.php?page=$num' class='btn btn-default'>$num </a>";
+								echo "<a href='pc.php?page=$num' class='btn btn-default'>$num </a>";
 								echo ' ';
 								$num+=1;
 							}
@@ -141,22 +142,23 @@
 						else{
 							$num = 1;
 							while($num < $pre){
-								
-								echo "<a href='test.php?page=".$num."' class='btn btn-default' >$num </a>";
+								echo "<a href='pc.php?page=".$num."' class='btn btn-default' >$num </a>";
 								echo ' ';
 								$num+=1;
 							}
 						
 						}
+						
+						//list current page
 						echo "<a class='btn btn-default' ><strong>$page</strong></a>";
 						echo ' ';
 						
+						//list $amt pages after current
 						$pre = $page;
 						if($pre <= $total-$amt){
 							$num = $pre+1;
 							while($num <= $pre+$amt){
-								
-								echo "<a class='btn btn-default' href='test.php?page=".$num."'>$num </a>";
+								echo "<a class='btn btn-default' href='pc.php?page=".$num."'>$num </a>";
 								echo ' ';
 								$num+=1;
 							}
@@ -164,64 +166,55 @@
 						else{
 							$num = $pre+1;
 							while($num <= $total){
-								
-								echo "<a class='btn btn-default' href='test.php?page=".$num."'>$num </a>";
+								echo "<a class='btn btn-default' href='pc.php?page=".$num."'>$num </a>";
 								echo ' ';
 								$num+=1;
 							}
 						
 						}
 						
-
-						
+						//list next page
 						if($page < $total){
-							$p=$page+1;
-							echo "<a class='btn btn-default' href='test.php?page=".$p."'> Next</a>";
+							$next=$page+1;
+							echo "<a class='btn btn-default' href='pc.php?page=".$next."'> Next</a>";
 							echo ' ';
 								
 						}
-						else {echo "<a class='btn btn-default'>Next</a>";
-							echo ' ';}
-						
-					
+						else{
+							echo "<a class='btn btn-default'>Next</a>";
+							echo ' ';
+						}
 					?>
 				</p>
 				</div>
-					
-
 			</div>
 		</div>
 
 	
- 
+		<!-- Table -->
 		<div class="container">	
 			<div class="span12" >
-		
-
 				<table >
 					<thead>
-					  <tr>
-						<th>
-						  
-						</th>
-						<th>
-						  Name
-						</th>
-						<th>
-						  Description
-						</th>
-						
-						<th class="last">
-						  Release Date
-						</th>
-
-						
-					  </tr>
+						<tr>
+							<th>
+							</th>
+							<th>
+							  Name
+							</th>
+							<th>
+							  Description
+							</th>
+							<th class="last">
+							  Release Date
+							</th>
+						</tr>
 					</thead>
 					
 					<tbody>
+
 					<?php
-						$query = @mysql_query("SELECT * FROM pcGames ORDER BY releaseDate LIMIT $start,$perPage");
+						$query = @mysql_query("SELECT * FROM Games WHERE systemID=$system ORDER BY releaseDate LIMIT $start,$perPage");
 						
 						while( $row = @mysql_fetch_assoc($query)) 
 						{
@@ -230,13 +223,11 @@
 							$name = $row['name'];
 							$description = $row['description'];
 							$date = $row['releaseDate'];
-							$link = $row['link'];
 							
-							echo "<tr><td>$src</td><td>$name</td><td>$description</td><td>$date</td>";
+							echo "<tr><td>$src</td><td>$name</td><td>$description</td><td><t11>$date</t11></td>";
 						 
 						}
 					?>
-					  
 					</tbody>
 	   
 				</table>
@@ -244,6 +235,15 @@
 			</div>
 		</div>
 
-
+		<!-- Footer -->
+		<footer>
+			<div class="container">
+			  <div class="row">
+				<div class="span6">Copyright &copy 2016 Albert Huang | All Rights Reserved <br></div>
+			  </div>
+			</div>
+		</footer>
 	</body>
+	
+
 </html>

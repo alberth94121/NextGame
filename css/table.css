@@ -6,10 +6,12 @@
 table {
   width: 100%;
   border-collapse: collapse;
-  font-family: arial;
+  font-family: 'Source Sans Pro', sans-serif;
   margin: 0 0 25px 0;
   border-radius: 15px;
 }
+
+
 table thead tr th {
 	
   vertical-align: middle;
@@ -23,11 +25,14 @@ table thead tr th {
   background: -o-linear-gradient(top, #e9eaec 1%, #dee2e8 100%);
   background: -ms-linear-gradient(top, #e9eaec 1%, #dee2e8 100%);
   background: linear-gradient(to bottom, #e9eaec 1%, #dee2e8 100%);
-  color: #9c9c9c;
-  border-color: #b7b7b7;
+  color: #024457;
+  border-color: #fff;
   font: normal normal bold 0.8em/1.5 sans-serif;
+  font-weight: bold;
   text-shadow: 0 1px #fff;
 }
+
+
 table tbody tr:first-child td {
   border-width: 5 0 1px 0;
 }
@@ -41,9 +46,9 @@ table tbody tr td {
   padding: 10px 8px 8px;
   border-style: solid;
   border-width: 5 0 1px 0;
-  border-color: #bbb #ccc #ccc #ccc;
+  border-color: #fff;
   background: #fdfdfd;
-  color: #6c6c6c;
+  color: #444;
   
   
 }
@@ -102,15 +107,15 @@ table tbody tr:nth-child(odd) {
   background-color: #fafafa;
 }
 table tbody tr:hover td {
-  background: #ffffd3;
-  background: -moz-linear-gradient(top, #ffffd3 0%, #ffffaf 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffd3), color-stop(100%, #ffffaf));
-  background: -webkit-linear-gradient(top, #ffffd3 0%, #ffffaf 100%);
-  background: -o-linear-gradient(top, #ffffd3 0%, #ffffaf 100%);
-  background: -ms-linear-gradient(top, #ffffd3 0%, #ffffaf 100%);
-  background: linear-gradient(to bottom, #ffffd3 0%, #ffffaf 100%);
-  border-color: #bbb #aaa #ccc #aaa;
-  border-style: solid dotted;
+  background: #E5E5E5;
+  background: -moz-linear-gradient(top, #E5E5E5 0%, #E5E5E5 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#E5E5E5), color-stop(100%, #E5E5E5));
+  background: -webkit-linear-gradient(top, #E5E5E5 0%, #E5E5E5 100%);
+  background: -o-linear-gradient(top, #E5E5E5 0%, #E5E5E5 100%);
+  background: -ms-linear-gradient(top, #E5E5E5 0%, #E5E5E5 100%);
+  background: linear-gradient(to bottom, #E5E5E5 0%, #E5E5E5 100%);
+
+
   cursor: pointer;
 }
 table tfoot tr td {
@@ -118,6 +123,11 @@ table tfoot tr td {
   border: 1px solid #ccc;
   min-height: 25px;
 }
+
+t11 {
+    white-space: nowrap;
+}
+
 
 .enable, .disabled {
   width: 100%;

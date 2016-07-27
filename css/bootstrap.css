@@ -125,6 +125,7 @@ button,
 input {
   *overflow: visible;
   line-height: normal;
+   vertical-align: middle;
 }
 
 button::-moz-focus-inner,
