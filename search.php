@@ -2,7 +2,11 @@
 
 <?php
 	include 'api.php';
-	dbConnect();
+	//dbConnect();
+	$db_connection = new mysqli($host, $user, $pw,$db);
+	if ($db_connection->connect_errno) {
+		echo "Failed to connect to MySQL: (" . $db_connection->connect_errno . ") " . $db_connection->connect_error;
+	}
 	
 	if(isset($_GET["page"])){ 
 		$page  = $_GET["page"]; 
@@ -24,10 +28,17 @@
 	};
 	$perPage = 10;
 	$start = ($page-1) * $perPage; 
-	$sql = "SELECT COUNT(gameID) FROM Games WHERE (systemID=$system AND name LIKE '%$search%')"; 
-	$rs = @mysql_query($sql); 
-	$row = mysql_fetch_row($rs);  
+	$sql = "SELECT COUNT(gameID) FROM Games WHERE (systemID=? AND name LIKE ?)"; 
+	if(!($stmt2 = $db_connection->prepare($sql)))
+		echo "Prepare failed";
+	$p = "%$search%";
+	$stmt2->bind_param('is',$system,$p);
+	$stmt2->execute();
+	$rs=$stmt2->get_result(); 
+	$row = $rs->fetch_row();  
+	//echo $row[0];
 	$total = ceil($row[0] / $perPage); 
+
 ?> 
 
 <html>
@@ -230,10 +241,19 @@
 					
 					<tbody>
 					<?php
-						$query = @mysql_query("SELECT * FROM Games WHERE (systemID=$system AND name LIKE '%$search%') ORDER BY releaseDate LIMIT $start,$perPage");
 						
-						while( $row = @mysql_fetch_assoc($query)) 
-						{
+						//$query =$db_connection->query("SELECT * FROM Games WHERE (systemID=$system AND name LIKE '%$search%') ORDER BY releaseDate LIMIT $start,$perPage");
+						
+						
+						
+						if(!($stmt = $db_connection->prepare("SELECT * FROM Games WHERE (systemID = ? AND name LIKE ?) ORDER BY releaseDate LIMIT $start,$perPage")))
+							 echo "Prepare failed";
+						 $p2="%$search%";
+						 
+						$stmt->bind_param('is',$system,$p2);
+						$stmt->execute();
+						$rslt=$stmt->get_result();
+						while( $row = $rslt->fetch_array(MYSQLI_ASSOC)){
 						    $image =  $row['gameID'];
 							$src = "<img src='img/$image.png'>";
 							$name = $row['name'];

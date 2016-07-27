@@ -1,5 +1,9 @@
 <?php
 
+	 $host = "localhost";
+	 $user = "root";
+	 $pw = "";
+	 $db = "test2";
 
 function dbConnect(){
 	 $host = "localhost";
@@ -15,6 +19,10 @@ function dbConnect(){
 	   exit(1);
 	 }
 }
+
+	 
+
+
 
 
 ?>
