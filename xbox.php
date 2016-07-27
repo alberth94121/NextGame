@@ -121,7 +121,7 @@
 						//list previous page
 						if($page > 1){
 							$p=$page-1;
-							echo "<a  href='pc.php?page=$p' class='button' >Prev </a>";
+							echo "<a  href='xbox.php?page=$p' class='button' >Prev </a>";
 							echo '';
 						}
 						else{
@@ -135,7 +135,7 @@
 						if($pre >= 1+ $amt){
 							$num = $pre-$amt;
 							while($num < $pre){
-								echo "<a href='pc.php?page=$num' class='button' >$num </a>";
+								echo "<a href='xbox.php?page=$num' class='button' >$num </a>";
 								echo '';
 								$num+=1;
 							}
@@ -143,7 +143,7 @@
 						else{
 							$num = 1;
 							while($num < $pre){
-								echo "<a href='pc.php?page=".$num."' class='button' >$num </a>";
+								echo "<a href='xbox.php?page=".$num."' class='button' >$num </a>";
 								echo '';
 								$num+=1;
 							}
@@ -159,7 +159,7 @@
 						if($pre <= $total-$amt){
 							$num = $pre+1;
 							while($num <= $pre+$amt){
-								echo "<a class='button'  href='pc.php?page=".$num."'>$num </a>";
+								echo "<a class='button'  href='xbox.php?page=".$num."'>$num </a>";
 								echo '';
 								$num+=1;
 							}
@@ -167,7 +167,7 @@
 						else{
 							$num = $pre+1;
 							while($num <= $total){
-								echo "<a class='button'  href='pc.php?page=".$num."'>$num </a>";
+								echo "<a class='button'  href='xbox.php?page=".$num."'>$num </a>";
 								echo '';
 								$num+=1;
 							}
@@ -177,7 +177,7 @@
 						//list next page
 						if($page < $total){
 							$next=$page+1;
-							echo "<a class='button'  href='pc.php?page=".$next."'> Next</a>";
+							echo "<a class='button'  href='xbox.php?page=".$next."'> Next</a>";
 							echo '';
 								
 						}

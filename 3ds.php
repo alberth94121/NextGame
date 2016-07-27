@@ -56,7 +56,7 @@
 	</head>
 
 	<!-- Body -->
-	<body>
+	<body >
 		<!-- Header -->
 		<div id="header-row">
 			<div class="container">
@@ -88,8 +88,9 @@
 		<!-- Title -->
 		<div class="container">		
 			<div class="row">
-				<div class="span12 cnt-title2" style="padding:20px">
-					<h1 style="text-align: left;margin:20px">Upcoming Nintendo 3DS Games!</h1> 
+				<div class="span12 cnt-title2" style="padding:20px" >
+				
+					<h1  style="text-align: left;margin:20px">Upcoming Nintendo 3DS Games!</h1> 
 				</div>
 			</div>
 		</div>
@@ -98,14 +99,14 @@
 		<div class="container">	
 			<div class="row">	
 				<div class="span12 cnt-title2" >
-					<form action="search.php?">
+					<form   action="search.php?">
 							<?php
 								$inputID ='<input type="hidden" name="id" value="'.$system.'" />';
 								echo $inputID;				
 							?>	
-							<input type="text" name="query" style="height: 15px;"/><br>
+							<input type="text" name="query" style="height: 15px;"/> <br>
 							<input type="hidden" name="page" value="1" />							
-							<input  class='btn btn-default' type="submit" value="Search"> 
+							<input  class='button3' type="submit" value="Search"> 
 					</form>	
 				</div>
 			</div>
@@ -120,12 +121,12 @@
 						//list previous page
 						if($page > 1){
 							$p=$page-1;
-							echo "<a  href='pc.php?page=$p' class='btn btn-default'>Prev </a>";
-							echo ' ';
+							echo "<a  href='3ds.php?page=$p' class='button' >Prev </a>";
+							echo '';
 						}
 						else{
-							echo "<a class='btn btn-default'>Prev</a>";
-							echo ' ';
+							echo "<a class='button' >Prev</a>";
+							echo '';
 						}
 						
 						// list $amt pages before current
@@ -134,40 +135,40 @@
 						if($pre >= 1+ $amt){
 							$num = $pre-$amt;
 							while($num < $pre){
-								echo "<a href='pc.php?page=$num' class='btn btn-default'>$num </a>";
-								echo ' ';
+								echo "<a href='3ds.php?page=$num' class='button' >$num </a>";
+								echo '';
 								$num+=1;
 							}
 						}
 						else{
 							$num = 1;
 							while($num < $pre){
-								echo "<a href='pc.php?page=".$num."' class='btn btn-default' >$num </a>";
-								echo ' ';
+								echo "<a href='3ds.php?page=".$num."' class='button' >$num </a>";
+								echo '';
 								$num+=1;
 							}
 						
 						}
 						
 						//list current page
-						echo "<a class='btn btn-default' ><strong>$page</strong></a>";
-						echo ' ';
+						echo "<a class='button2' ><strong>$page</strong></a>";
+						echo '';
 						
 						//list $amt pages after current
 						$pre = $page;
 						if($pre <= $total-$amt){
 							$num = $pre+1;
 							while($num <= $pre+$amt){
-								echo "<a class='btn btn-default' href='pc.php?page=".$num."'>$num </a>";
-								echo ' ';
+								echo "<a class='button'  href='3ds.php?page=".$num."'>$num </a>";
+								echo '';
 								$num+=1;
 							}
 						}
 						else{
 							$num = $pre+1;
 							while($num <= $total){
-								echo "<a class='btn btn-default' href='pc.php?page=".$num."'>$num </a>";
-								echo ' ';
+								echo "<a class='button'  href='3ds.php?page=".$num."'>$num </a>";
+								echo '';
 								$num+=1;
 							}
 						
@@ -176,13 +177,13 @@
 						//list next page
 						if($page < $total){
 							$next=$page+1;
-							echo "<a class='btn btn-default' href='pc.php?page=".$next."'> Next</a>";
-							echo ' ';
+							echo "<a class='button'  href='3ds.php?page=".$next."'> Next</a>";
+							echo '';
 								
 						}
 						else{
-							echo "<a class='btn btn-default'>Next</a>";
-							echo ' ';
+							echo "<a class='button' >Next</a>";
+							echo '';
 						}
 					?>
 				</p>
