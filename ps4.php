@@ -90,28 +90,20 @@
 			<div class="row">
 				<div class="span12 cnt-title2" style="padding:20px" >
 				
-					<h1  style="text-align: left;margin:20px">Upcoming PS4 Games!</h1> 
-				</div>
-			</div>
-		</div>
-		
-		<!-- SearchBox -->
-		<div class="container">	
-			<div class="row">	
-				<div class="span12 cnt-title2" >
-					<form   action="search.php?">
+					<h1  style="text-align: left;margin:20px">Upcoming PS4 Games!
+					<form   style="text-align: right" action="search.php?">
 							<?php
 								$inputID ='<input type="hidden" name="id" value="'.$system.'" />';
 								echo $inputID;				
 							?>	
-							<input type="text" name="query" style="height: 15px;"/> <br>
+							<input type="textbox" name="query" style="padding:5px" />  
 							<input type="hidden" name="page" value="1" />							
-							<input  class='button3' type="submit" value="Search"> 
-					</form>	
+							<input  class='button4' type="submit" value="Search" style=""> 
+					</form>	</h1> 
 				</div>
 			</div>
 		</div>
-
+		
 		<!-- Pages -->
 		<div class="container">	
 			<div class="row">	
@@ -233,6 +225,84 @@
 	   
 				</table>
 					
+			</div>
+		</div>
+<!-- Pages -->
+		<div class="container">	
+			<div class="row">	
+				<div class="span12 cnt-title2" style="padding:0px">
+				<p class="nav">				
+					<?php
+						//list previous page
+						if($page > 1){
+							$p=$page-1;
+							echo "<a  href='ps4.php?page=$p' class='button' >Prev </a>";
+							echo '';
+						}
+						else{
+							echo "<a class='button' >Prev</a>";
+							echo '';
+						}
+						
+						// list $amt pages before current
+						$pre = $page;
+						$amt = 5;
+						if($pre >= 1+ $amt){
+							$num = $pre-$amt;
+							while($num < $pre){
+								echo "<a href='ps4.php?page=$num' class='button' >$num </a>";
+								echo '';
+								$num+=1;
+							}
+						}
+						else{
+							$num = 1;
+							while($num < $pre){
+								echo "<a href='ps4.php?page=".$num."' class='button' >$num </a>";
+								echo '';
+								$num+=1;
+							}
+						
+						}
+						
+						//list current page
+						echo "<a class='button2' ><strong>$page</strong></a>";
+						echo '';
+						
+						//list $amt pages after current
+						$pre = $page;
+						if($pre <= $total-$amt){
+							$num = $pre+1;
+							while($num <= $pre+$amt){
+								echo "<a class='button'  href='ps4.php?page=".$num."'>$num </a>";
+								echo '';
+								$num+=1;
+							}
+						}
+						else{
+							$num = $pre+1;
+							while($num <= $total){
+								echo "<a class='button'  href='ps4.php?page=".$num."'>$num </a>";
+								echo '';
+								$num+=1;
+							}
+						
+						}
+						
+						//list next page
+						if($page < $total){
+							$next=$page+1;
+							echo "<a class='button'  href='ps4.php?page=".$next."'> Next</a>";
+							echo '';
+								
+						}
+						else{
+							echo "<a class='button' >Next</a>";
+							echo '';
+						}
+					?>
+				</p>
+				</div>
 			</div>
 		</div>
 

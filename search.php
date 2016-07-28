@@ -108,43 +108,37 @@
 		<!-- Title -->
 		<div class="container">		
 			<div class="row">
-					  <div class="span12 cnt-title2" style="padding:20px">
+					  <div class="span12 cnt-title2" style="padding:20px"><h1 style="text-align:left;margin:20px">
 					  <?php
 					    if($system == 1){
-							echo '<h1 style="text-align:left;margin:20px">PC Games</h1>'; 
+							echo  'PC Games'; 
 						 }
 						else if($system == 2){
-							echo '<h1 style="text-align:left;margin:20px">PS4 Games</h1>'; 
+							echo 'PS4 Games'; 
 						 }
 						else if($system == 3){
-							echo '<h1 style="text-align:left;margin:20px">Xbox One Games</h1>'; 
+							echo 'Xbox One Games'; 
 						 }
 						else if($system == 4){
-							echo '<h1 style="text-align:left;margin:20px">Nintendo 3DS Games</h1>'; 
+							echo 'Nintendo 3DS Games'; 
 						 }
 						else
-							echo '<h1 style="text-align:left;margin:20px">All Games</h1>';
+							echo 'All Games';
 					  ?>
+					  <form   style="text-align: right" action="search.php?">
+							<?php
+								$inputID ='<input type="hidden" name="id" value="'.$system.'" />';
+								echo $inputID;				
+							?>	
+							<input type="textbox" name="query" style="padding:5px" />  
+							<input type="hidden" name="page" value="1" />							
+							<input  class='button4' type="submit" value="Search" style=""> 
+					</form>	</h1>
 					  </div>				   
 			</div>
 		</div>
 		
-		<!-- SearchBos -->
-		<div class="container">	
-			<div class="row">	
-				<div class="span12 cnt-title2" >
-					<form action="search.php?" >
-						<?php
-							$text2='<input type="hidden" name="id" value="'.$system.'" />';
-							echo $text2;				
-						?>	
-						<input type="text" name="query" style="height: 15px;"/><br> 
-						<input type="hidden" name="page" value="1" />	
-						<input  class='button3' type="submit" value="Search"> 
-					</form>	
-				</div>
-			</div>
-		</div>
+		
 
 		<!-- Pages -->
 		<div class="container">	
@@ -270,7 +264,86 @@
 					
 			</div>
 		</div>
+	<!-- Pages -->
+		<div class="container">	
+			<div class="row">	
+				<div class="span12 cnt-title2" style="padding:0px">
+				<p class="nav">				
+					<?php
+						if($page > 1){
+							$p=$page-1;
+							echo "<a  href='search.php?id=$system&query=$search&page=$p' class='button'>Prev </a>";
+							echo '';
+						}
+						else {
+							echo "<a class='button'>Prev</a>";
+							echo '';
+						}
+						
+						$pre = $page;
+						$amt = 5;
+						if($pre >= 1+ $amt){
+							$num = $pre-$amt;
+							while($num < $pre){
+								echo "<a href='search.php?id=$system&query=$search&page=$num' class='button'>$num </a>";
+								echo '';
+								$num+=1;
+							}
+						}
+						else{
+							$num = 1;
+							while($num < $pre){
+								echo "<a href='search.php?id=$system&query=$search&page=$num' class='button' >$num </a>";
+								echo '';
+								$num+=1;
+							}
+						
+						}
+						
+						echo "<a class='button2' ><strong>$page</strong></a>";
+						echo '';
+						
+						$pre = $page;
+						if($pre <= $total-$amt){
+							$num = $pre+1;
+							while($num <= $pre+$amt){
+								echo "<a class='button' href='search.php?id=$system&query=$search&page=$num'>$num </a>";
+								echo '';
+								$num+=1;
+							}
+						}
+						else{
+							$num = $pre+1;
+							while($num <= $total){
+								echo "<a class='button' href='search.php?id=$system&query=$search&page=$num'>$num </a>";
+								echo '';
+								$num+=1;
+							}
+						}
+						
+						if($page < $total){
+							$next=$page+1;
+							echo "<a class='button' href='search.php?id=$system&query=$search&page=$next'> Next</a>";
+							echo '';
+								
+						}
+						else {
+							echo "<a class='button'>Next</a>";
+							echo '';
+						}
+					?>
+				</p>
+				</div>
+			</div>
+		</div>
 
-
+	<!-- Footer -->
+		<footer>
+			<div class="container">
+			  <div class="row">
+				<div class="span6">Copyright &copy 2016 Albert Huang | All Rights Reserved <br></div>
+			  </div>
+			</div>
+		</footer>
 	</body>
 </html>

@@ -399,13 +399,26 @@ margin-top: -5px;
     background-color: #e9eaec;
       border: 1px solid #b7b7b7;
     color: #024457;
-  padding: 6px 15px;
+ padding:5px 1px;
+ margin-top:1px;
   
     text-align: center;
 	font-size: 14px;
 	vertical-align:middle;
-margin-top: -5px;
+
 	
+}
+
+.button4{
+	   background-color: #e9eaec;
+      border: 1px solid #b7b7b7;
+    color: #024457;
+ padding:5px 10px;
+ margin-top:1px;
+  
+    text-align: center;
+	font-size: 14px;
+	vertical-align:middle;
 }
 
  input[type=text] {
